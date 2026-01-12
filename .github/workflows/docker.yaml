@@ -24,6 +24,11 @@ jobs:
         echo "=============================================================================="
         df -hT
         echo "=============================================================================="
+    - name: Configure Docker Mirror (Key Step!)
+      run: |
+        sudo mkdir -p /etc/docker
+        echo '{"registry-mirrors": ["https://jnvhbt50.mirror.aliyuncs.com"]}' | sudo tee /etc/docker/daemon.json
+        sudo systemctl restart docker
 
     # 增加可用磁盘空间
     - name: Maximize build space
